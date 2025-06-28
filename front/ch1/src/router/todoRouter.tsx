@@ -1,8 +1,12 @@
 import { Children, lazy, Suspense } from "react";
 import { Loading } from "./root";
+import { Navigate } from "react-router";
 
 const TodoIndex = lazy(() => import("../pages/todo/indexPage"));
 const TodoList = lazy(() => import("../pages/todo/listPage"));
+const TodoRead = lazy(() => import("../pages/todo/readPage"));
+const TodoAdd = lazy(() => import("../pages/todo/addPage"));
+const TodoModify = lazy(() => import("../pages/todo/modifyPage"));
 
 const todoRouter = () => {
   return {
@@ -16,6 +20,34 @@ const todoRouter = () => {
             <TodoList />
           </Suspense>
         ),
+      },
+      {
+        path: "read/:tno",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <TodoRead />
+          </Suspense>
+        ),
+      },
+      {
+        path: "modify/:tno",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <TodoModify />
+          </Suspense>
+        ),
+      },
+      {
+        path: "add",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <TodoAdd />
+          </Suspense>
+        ),
+      },
+      {
+        path: "",
+        element: <Navigate to={`/todo/list`}></Navigate>,
       },
     ],
   };
