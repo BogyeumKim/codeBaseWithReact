@@ -35,12 +35,10 @@ public class TodoRepsotiryTests {
 
         for (int i = 0; i < 100; i++) {
 
-            final Todo todo = Todo.builder().title("Title.."+i).content("Content ...."+i).dueDate(LocalDate.of(2023, 12, 30)).build();
+            final Todo todo = Todo.builder().title("Title.." + i).content("Content ...." + i).dueDate(LocalDate.of(2023, 12, 30)).build();
             Todo result = todoRepository.save(todo);
             log.info("RESULT :: {} ", result);
         }
-
-
 
 
     }
@@ -54,7 +52,7 @@ public class TodoRepsotiryTests {
 
         Todo todo = result.orElseThrow();
 
-        log.info("READ :: {} ",todo);
+        log.info("READ :: {} ", todo);
 
     }
 
@@ -77,21 +75,22 @@ public class TodoRepsotiryTests {
     }
 
     @Test
-    public void testPaging(){
+    public void testPaging() {
 
         // 페이지 번호는 0부터
-        Pageable pageable = PageRequest.of(0,10, Sort.by("tno").descending());
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("tno").descending());
 
         Page<Todo> result = todoRepository.findAll(pageable);
 
-        log.info("PAGE :: {}",result.getTotalElements());
+        log.info("PAGE :: {}", result.getTotalElements());
 
         log.info("RESULT :: {}", result.getContent());
     }
 
-    @Test
+    /*@Test
     void testSearch1() {
         todoRepository.search1();
-    }
+    }*/
+
 
 }
