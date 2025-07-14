@@ -10,6 +10,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -54,6 +55,10 @@ public class CustomFileUtil {
         List<String> uploadNames = new ArrayList<>();
 
         for (MultipartFile file : files) {
+
+            if (!StringUtils.hasText(file.getOriginalFilename())){
+                continue;
+            }
 
             String saveName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
 
