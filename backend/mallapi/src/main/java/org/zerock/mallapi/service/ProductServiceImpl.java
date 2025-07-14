@@ -152,4 +152,10 @@ public class ProductServiceImpl implements ProductService {
         // 저장
         productRepository.save(product);
     }
+
+    @Override
+    public void remove(Long pno) {
+        // 원래 삭제는없음 db flg값을 0 으로바꿔야하는것임
+        productRepository.deleteById(pno);
+    }
 }
