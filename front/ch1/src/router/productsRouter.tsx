@@ -7,6 +7,7 @@ const ProductsIndex = lazy(() => import("../pages/products/indexPage"));
 const ProductsList = lazy(() => import("../pages/products/listPage"));
 const ProductsAdd = lazy(() => import("../pages/products/addPage"));
 const ProductsRead = lazy(() => import("../pages/products/readPage"));
+const ProductsModify = lazy(() => import("../pages/products/modifyPage"));
 
 const Loading = () => <div>Products Loading....</div>;
 
@@ -41,6 +42,15 @@ export default function productsRouter() {
         element: (
           <Suspense fallback={<Loading />}>
             <ProductsRead />
+          </Suspense>
+        ),
+        loader: loadProduct,
+      },
+      {
+        path: "modify/:pno",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <ProductsModify />
           </Suspense>
         ),
         loader: loadProduct,
