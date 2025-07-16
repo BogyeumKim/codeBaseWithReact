@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Navigate } from "react-router";
+import { loadProducts } from "../pages/products/listPage";
 
 const ProductsIndex = lazy(() => import("../pages/products/indexPage"));
 const ProductsList = lazy(() => import("../pages/products/listPage"));
@@ -19,6 +20,7 @@ export default function productsRouter() {
             <ProductsList />
           </Suspense>
         ),
+        loader: loadProducts,
       },
       {
         path: "",
