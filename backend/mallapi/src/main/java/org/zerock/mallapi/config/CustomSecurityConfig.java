@@ -33,6 +33,10 @@ public class CustomSecurityConfig {
 
         http.csrf(AbstractHttpConfigurer::disable);
 
+        http.formLogin(httpSecurityFormLoginConfigurer -> {
+            httpSecurityFormLoginConfigurer.loginPage("/api/member/login");
+        });
+
         return http.build();
     }
 
