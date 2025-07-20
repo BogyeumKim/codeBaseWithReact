@@ -10,14 +10,14 @@ import java.util.Date;
 import java.util.Map;
 
 @Log4j2
-public class JWTUItil {
+public class JWTUtil {
 
     private static String key = "1234567890123456789012345678901234567890";
 
     public static String generateToken(Map<String, Object> valueMap, int min) {
         SecretKey key = null;
         try{
-            key = Keys.hmacShaKeyFor(JWTUItil.key.getBytes("UTF-8"));
+            key = Keys.hmacShaKeyFor(JWTUtil.key.getBytes("UTF-8"));
         }catch(Exception e){
             throw new RuntimeException(e.getMessage());
         }
@@ -34,7 +34,7 @@ public class JWTUItil {
     public static Map<String, Object> validateToken(String token) {
         Map<String, Object> claim = null;
         try{
-            SecretKey key = Keys.hmacShaKeyFor(JWTUItil.key.getBytes("UTF-8"));
+            SecretKey key = Keys.hmacShaKeyFor(JWTUtil.key.getBytes("UTF-8"));
             claim = Jwts.parserBuilder()
                     .setSigningKey(key)
                     .build()

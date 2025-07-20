@@ -10,7 +10,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.zerock.mallapi.dto.MemberDTO;
-import org.zerock.mallapi.util.JWTUItil;
+import org.zerock.mallapi.util.JWTUtil;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,7 +31,7 @@ public class JWTCheckFilter extends OncePerRequestFilter {
         String path = request.getRequestURI();
 
         log.info("check uri ------------------------" + path);
-        if ( path.startsWith("/api/member/login") ) {
+        if ( path.startsWith("/api/member/login") || path.startsWith("/api/member/refresh")) {
             return true;
         }
 
@@ -58,7 +58,7 @@ public class JWTCheckFilter extends OncePerRequestFilter {
         try {
             //Bearer accestoken...
             String accessToken = authHeaderStr.substring(7);
-            Map<String, Object> claims = JWTUItil.validateToken(accessToken);
+            Map<String, Object> claims = JWTUtil.validateToken(accessToken);
 
             log.info("JWT claims: " + claims);
 
