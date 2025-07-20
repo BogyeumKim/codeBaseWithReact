@@ -10,10 +10,12 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.zerock.mallapi.security.filter.JWTCheckFilter;
 import org.zerock.mallapi.security.handler.APILoginFailHandler;
 import org.zerock.mallapi.security.handler.APILoginSuccessHandler;
 
@@ -41,6 +43,9 @@ public class CustomSecurityConfig {
             httpSecurityFormLoginConfigurer.successHandler(new APILoginSuccessHandler());
             httpSecurityFormLoginConfigurer.failureHandler(new APILoginFailHandler());
         });
+
+        // usernamepassword 필터 타기전에 jwtcheck를 미리 해라
+        http.addFilterBefore(new JWTCheckFilter(), UsernamePasswordAuthenticationFilter.class);
 
         http.sessionManagement(config -> {
             config.sessionCreationPolicy(SessionCreationPolicy.NEVER);
