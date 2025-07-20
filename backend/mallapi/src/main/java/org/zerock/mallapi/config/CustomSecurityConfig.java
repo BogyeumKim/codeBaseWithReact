@@ -19,6 +19,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.zerock.mallapi.security.filter.JWTCheckFilter;
 import org.zerock.mallapi.security.handler.APILoginFailHandler;
 import org.zerock.mallapi.security.handler.APILoginSuccessHandler;
+import org.zerock.mallapi.security.handler.CustomAccessDeniedHandler;
 
 import java.util.Arrays;
 import java.util.List;
@@ -48,6 +49,10 @@ public class CustomSecurityConfig {
 
         // usernamepassword 필터 타기전에 jwtcheck를 미리 해라
         http.addFilterBefore(new JWTCheckFilter(), UsernamePasswordAuthenticationFilter.class);
+
+        http.exceptionHandling(config -> {
+            config.accessDeniedHandler(new CustomAccessDeniedHandler());
+        });
 
         http.sessionManagement(config -> {
             config.sessionCreationPolicy(SessionCreationPolicy.NEVER);
