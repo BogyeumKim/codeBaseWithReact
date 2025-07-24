@@ -34,9 +34,13 @@ function BasicMenu() {
 
       <div className="w-1/5 flex justify-end bg-orange-300 p-4 font-medium">
         {!loginState.email ? (
-          <div className="text-white text-sm m-1 rounded">Login</div>
+          <div className="text-white text-sm m-1 rounded">
+            <NavLink to={"/member/login"}>Login</NavLink>
+          </div>
         ) : (
-          <div className="text-white text-sm m-1 rounded">Logout</div>
+          <div className="text-white text-sm m-1 rounded">
+            <NavLink to={"/member/logout"}>Logout</NavLink>
+          </div>
         )}
       </div>
     </nav>
