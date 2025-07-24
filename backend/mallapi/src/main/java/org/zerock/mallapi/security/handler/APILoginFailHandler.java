@@ -21,6 +21,7 @@ public class APILoginFailHandler implements AuthenticationFailureHandler {
         Gson gson = new Gson();
         String jsonStr = gson.toJson(Map.of("error", "ERROR_LOGIN"));
         response.setContentType("application/json");
+        response.setStatus(401);
         PrintWriter printWriter = response.getWriter();
         printWriter.println(jsonStr);
         printWriter.close();
