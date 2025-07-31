@@ -2,11 +2,14 @@ import { useSelector } from "react-redux";
 import { NavLink } from "react-router";
 import type { LoginInfo } from "../../slices/loginSlice";
 import type { RootState } from "../../store";
+import useCustomLogin from "../../hooks/useCustomLogin";
 
 function BasicMenu() {
-  const loginState: LoginInfo = useSelector(
-    (state: RootState) => state.loginSlice
-  );
+  // const loginState: LoginInfo = useSelector(
+  //   (state: RootState) => state.loginSlice
+  // );
+
+  const { loginState, loginStatus } = useCustomLogin();
 
   return (
     <nav id="navbar" className=" flex bg-blue-300">
@@ -19,7 +22,7 @@ function BasicMenu() {
             <NavLink to="/about">About</NavLink>
           </li>
 
-          {loginState.email && (
+          {loginStatus && (
             <>
               <li className="pr-6 text-2xl">
                 <NavLink to="/todo/">Todo</NavLink>
@@ -33,12 +36,13 @@ function BasicMenu() {
       </div>
 
       <div className="w-1/5 flex justify-end bg-orange-300 p-4 font-medium">
-        {!loginState.email ? (
+        {!loginStatus ? (
           <div className="text-white text-sm m-1 rounded">
             <NavLink to={"/member/login"}>Login</NavLink>
           </div>
         ) : (
           <div className="text-white text-sm m-1 rounded">
+            <p>{loginState.nickname} 님 </p>
             <NavLink to={"/member/logout"}>Logout</NavLink>
           </div>
         )}
