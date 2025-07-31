@@ -3,6 +3,7 @@ import { useActionState } from "react";
 import PendingModal from "../common/pendingModal";
 import ResultModal from "../common/resultModal";
 import useCustomMove from "../../hooks/useCustomMove";
+import jwtAxios from "../../util/jwtUtil";
 
 interface ProductAddResult {
   result?: number;
@@ -27,7 +28,10 @@ const addAsyncAction = async (
   if (!pname) {
     return { error: "Insert Product Name" };
   }
-  const res = await axios.post("http://localhost:8080/api/products/", formData);
+  const res = await jwtAxios.post(
+    "http://localhost:8080/api/products/",
+    formData
+  );
 
   return { result: res.data.result };
 };
