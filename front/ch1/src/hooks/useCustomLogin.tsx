@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../store";
 import { Navigate, useNavigate } from "react-router";
-import { loginPostAsync, logout } from "../slices/loginSlice";
+import { loginPostAsync, logout, save } from "../slices/loginSlice";
+import { useEffect } from "react";
+import { getCookie } from "../util/cookieUtil";
 
 const useCustomLogin = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -10,6 +12,15 @@ const useCustomLogin = () => {
 
   //로그인 여부
   const loginStatus = loginState.status; // fulfilled , pending ,rejected
+
+  useEffect(() => {
+    if (!loginStatus) {
+      const cookieData = getCookie("member");
+      if (cookieData) {
+        dispatch(save(cookieData));
+      }
+    }
+  }, []);
   const navigate = useNavigate();
   const doLogin = async (email: string, pw: string) => {
     dispatch(loginPostAsync({ email, pw }));
