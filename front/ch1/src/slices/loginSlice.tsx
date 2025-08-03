@@ -40,8 +40,11 @@ const loginSlice = createSlice({
     // },
     save: (state, action) => {
       console.log("save...................");
+      const payload = action.payload; //{소셜로그인 회원이 사용}
+      const newState = { ...payload, status: "saved" };
 
-      return action.payload;
+      setCookie("member", JSON.stringify(newState), 1);
+      return payload;
     },
     logout: (state, action) => {
       console.log("logout ............");
