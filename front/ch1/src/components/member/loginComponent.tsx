@@ -5,6 +5,7 @@ import type { AppDispatch, RootState } from "../../store";
 import { useNavigate } from "react-router";
 import ResultModal from "../common/resultModal";
 import useCustomLogin from "../../hooks/useCustomLogin";
+import KakaoLoginComponent from "./kakaoLoginComponent";
 
 // import { login } from "../../slices/loginSlice";
 interface LoginResult {
@@ -99,6 +100,7 @@ function LoginComponent() {
           </div>
         </div>
       </div>
+      <KakaoLoginComponent />
     </div>
   );
 }
