@@ -37,3 +37,11 @@ export const getAccessToken = async (authCode: string) => {
 
   return accessToken;
 };
+
+export const getMemberWithAccessToken = async (accessToken: string) => {
+  const res = await axios.get(
+    `http://localhost:8080/api/member/kakao?accessToken=${accessToken}`
+  );
+
+  return res.data;
+};

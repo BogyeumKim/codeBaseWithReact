@@ -1,27 +1,36 @@
 package org.zerock.mallapi.service;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.zerock.mallapi.dto.MemberDTO;
+import org.zerock.mallapi.repository.MemberRepository;
 
 import java.util.LinkedHashMap;
 
 @Service
 @Transactional
 @Log4j2
+@RequiredArgsConstructor
 public class MemberServiceImpl implements MemberSerivce{
 
+
+    private final PasswordEncoder passwordEncoder;
+    private final MemberRepository memberRepository;
+
+    
     @Override
     public MemberDTO getKakaoMember(String accessToken) {
-        String email = getEmailFromKakaoAccessToken(accessToken);
+         String email = getEmailFromKakaoAccessToken(accessToken);
 
         log.info("email: " + email );
 
@@ -52,14 +61,13 @@ public class MemberServiceImpl implements MemberSerivce{
         log.info("------------------------------------");
         log.info("bodyMap: " + bodyMap);
 
-       /* log.info(bodyMap);
+        log.info(bodyMap);
 
-        LinkedHashMap<String, String> kakaoAccount = bodyMap.get("kakao_account");
+        LinkedHashMap<String, String> kakaoAccount = bodyMap.get("properties");
 
         log.info("kakaoAccount: " + kakaoAccount);
-        return kakaoAccount.get("email");*/
+        return kakaoAccount.get("nickname");
 
-        return null;
     }
 
 }
