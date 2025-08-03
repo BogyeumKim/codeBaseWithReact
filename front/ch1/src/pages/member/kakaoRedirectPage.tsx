@@ -11,7 +11,10 @@ const KakaoRedirectPage = () => {
     if (authCode) {
       getAccessToken(authCode).then((accessToken) => {
         console.log("TOKEN!!!!!!!!!", accessToken);
-        getMemberWithAccessToken(accessToken);
+        getMemberWithAccessToken(accessToken).then((result) => {
+          console.log("=======================");
+          console.log(result);
+        });
       });
     }
   }, [authCode]);

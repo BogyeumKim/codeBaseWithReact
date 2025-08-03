@@ -12,6 +12,7 @@ public interface MemberSerivce {
 
     default MemberDTO entityToDTO(Member member) {
 
+        System.out.println("TEST!!!!");
         MemberDTO dto = new MemberDTO(
                 member.getEmail(),
                 member.getPw(),
