@@ -22,7 +22,7 @@ public interface CartItemRepository extends JpaRepository<CartItem,Long> {
             " where " +
             " pi.ord = 0" +
             " and mc.owner.email =  :email order by ci.cino desc ")
-    List<Object[]> getItemsOfCartDTOByEmail(@Param("email") String email);
+    List<CartItemListDTO> getItemsOfCartDTOByEmail(@Param("email") String email);
 
 
     // 이메일 , 상품번호로 해당 상품이 장바구니 아이템으로 존재하는지 확인
