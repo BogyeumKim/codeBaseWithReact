@@ -13,7 +13,7 @@ import lombok.*;
         @Index(columnList = "cart_cno", name = "idx_cartitem_cart"),
         @Index(columnList = "product_pno",name = "idx_cartitem_pno_card")
 })
-public class CardItem {
+public class CartItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
