@@ -1,20 +1,29 @@
 import { useDispatch, useSelector } from "react-redux";
 
 import { useEffect } from "react";
-import useCustomLogin from "./useCustomLogin";
-import { getCartItemsAsync, postChangeCartAsync } from "../slices/cartSlice";
-import type { AppDispatch, RootState } from "../store";
+// import useCustomLogin from "./useCustomLogin";
+// import { getCartItemsAsync, postChangeCartAsync } from "../slices/cartSlice";
+// import type { AppDispatch, RootState } from "../store";
+import useZustandMember from "../zstore/useZustandMember";
+import useZustandCart from "../zstore/useZustandCart";
 
 function useCustomCart() {
-  const { loginState, loginStatus } = useCustomLogin();
+  const { member: loginState, status: loginStatus } = useZustandMember();
 
-  const cartItems = useSelector((state: RootState) => state.cartSlice);
+  const { items, getItems, requestChangeCart, status } = useZustandCart();
 
-  const dispatch = useDispatch<AppDispatch>();
+  const cartItems = { items: items, status: status };
+  // const loginState = mem
+  // const { loginState, loginStatus } = useCustomLogin();
+
+  // const cartItems = useSelector((state: RootState) => state.cartSlice);
+
+  // const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     if (loginStatus) {
-      dispatch(getCartItemsAsync());
+      // dispatch(getCartItemsAsync());
+      getItems();
     }
   }, [loginStatus]);
 
@@ -35,7 +44,8 @@ function useCustomCart() {
 
     console.log(requestItem);
 
-    dispatch(postChangeCartAsync(requestItem));
+    // dispatch(postChangeCartAsync(requestItem));
+    requestChangeCart(requestItem);
   };
 
   return { loginState, loginStatus, cartItems, changeCart };
