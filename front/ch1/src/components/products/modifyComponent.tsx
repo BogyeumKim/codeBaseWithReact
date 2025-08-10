@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from "react";
+import { useState } from "react";
 import useCustomMove from "../../hooks/useCustomMove";
 import ResultModal from "../common/resultModal";
 import jwtAxios from "../../util/jwtUtil";
@@ -7,7 +7,7 @@ function ModifyComponent({ product }: { product: ProductDTO }) {
   const { moveToRead, moveToList } = useCustomMove();
   const [images, setImages] = useState<string[]>([...product.uploadFileNames]);
 
-  const deleteOldImages = (event: MouseEvent, target: string) => {
+  const deleteOldImages = (event: React.MouseEvent, target: string) => {
     event.preventDefault();
     event.stopPropagation();
     setImages((prev) => prev.filter((img) => img !== target));
