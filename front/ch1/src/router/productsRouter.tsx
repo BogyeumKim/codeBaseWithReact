@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Navigate } from "react-router";
-import { loadProducts } from "../pages/products/listPage";
+// import { loadProducts } from "../pages/products/listPage";
 import { loadProduct } from "../pages/products/readPage";
 
 const ProductsIndex = lazy(() => import("../pages/products/indexPage"));
@@ -23,7 +23,7 @@ export default function productsRouter() {
             <ProductsList />
           </Suspense>
         ),
-        loader: loadProducts,
+        // loader: loadProducts,
       },
       {
         path: "",
@@ -53,7 +53,7 @@ export default function productsRouter() {
             <ProductsModify />
           </Suspense>
         ),
-        loader: loadProduct,
+        // loader: loadProduct,
       },
     ],
   };
