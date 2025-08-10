@@ -2,7 +2,7 @@ import useCustomCart from "../../hooks/useCartCustomCart";
 import CartItemComponent from "../cart/cartItemComponent";
 
 function CartComponent() {
-  const { loginState, loginStatus, cartItems } = useCustomCart();
+  const { loginState, loginStatus, cartItems, changeCart } = useCustomCart();
 
   return (
     <div className="w-full">
@@ -21,6 +21,7 @@ function CartComponent() {
                   <CartItemComponent
                     cartItem={item}
                     key={item.cino}
+                    changeCart={changeCart}
                   ></CartItemComponent>
                 ))}
               </ul>
