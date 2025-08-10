@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Navigate } from "react-router";
 // import { loadProducts } from "../pages/products/listPage";
-import { loadProduct } from "../pages/products/readPage";
+// import { loadProduct } from "../pages/products/readPage";
 
 const ProductsIndex = lazy(() => import("../pages/products/indexPage"));
 const ProductsList = lazy(() => import("../pages/products/listPage"));
@@ -44,7 +44,7 @@ export default function productsRouter() {
             <ProductsRead />
           </Suspense>
         ),
-        loader: loadProduct,
+        // loader: loadProduct,
       },
       {
         path: "modify/:pno",
